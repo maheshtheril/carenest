@@ -408,6 +408,8 @@ button, input, select, textarea {
 .portal-grid {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  flex: 1;
   max-width: 480px; /* Constrain to mobile app width */
   margin: 0 auto;
   padding: 0;
