@@ -247,8 +247,8 @@ export default function MapSimulator({
   }, [navigatingIndex, routeCoordinates, onLocationUpdate]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }}></div>
+    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden' }}>
+      <div ref={mapContainerRef} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}></div>
       
       {/* Route Navigation info HUD Overlay */}
       {activeBooking && activeBooking.status === 'EnRoute' && (
