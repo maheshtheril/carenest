@@ -247,7 +247,7 @@ export default function MapSimulator({
   }, [navigatingIndex, routeCoordinates, onLocationUpdate]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '350px', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
       <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }}></div>
       
       {/* Route Navigation info HUD Overlay */}

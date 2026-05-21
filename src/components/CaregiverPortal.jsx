@@ -237,37 +237,6 @@ export default function CaregiverPortal({ user, socket, token, showToast, format
           isCaregiverActive={true}
         />
 
-        {/* Earnings history below map */}
-        <div className="glass-panel" style={{ padding: '25px' }}>
-          <h4 className="history-title">Visits & Earnings History</h4>
-          <div className="stats-grid">
-            <div className="stat-box">
-              <span className="label">Total Payout</span>
-              <div className="value">{formatPrice ? formatPrice(stats.totalEarnings) : `$${stats.totalEarnings}`}</div>
-            </div>
-            <div className="stat-box">
-              <span className="label">Visits Completed</span>
-              <div className="value">{stats.totalJobs}</div>
-            </div>
-          </div>
-          
-          <h5 style={{ fontSize: '14px', marginBottom: '12px' }}>Recent Payouts</h5>
-          {stats.recentJobs && stats.recentJobs.length === 0 ? (
-            <p style={{ color: 'var(--text-muted)', fontSize: '13px' }}>No completed visits logged.</p>
-          ) : (
-            <div className="history-list">
-              {stats.recentJobs && stats.recentJobs.map(j => (
-                <div className="history-card" key={j.id}>
-                  <div className="history-info">
-                    <h5>{j.patient_name}</h5>
-                    <span className="date">ID: #{j.id} • Completed</span>
-                  </div>
-                  <div className="history-payout">{formatPrice ? formatPrice(j.payout) : `$${j.payout}`}</div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
 
       {/* Dispatch console right column */}
@@ -312,6 +281,40 @@ export default function CaregiverPortal({ user, socket, token, showToast, format
             >
               {cgStatus === 'Available' ? 'Go Offline' : 'Go Online'}
             </button>
+          </div>
+        )}
+
+        {/* Earnings history moved to bottom sheet */}
+        {!activeJob && (
+          <div className="glass-panel" style={{ padding: '25px' }}>
+            <h4 className="history-title">Visits & Earnings History</h4>
+            <div className="stats-grid">
+              <div className="stat-box">
+                <span className="label">Total Payout</span>
+                <div className="value">{formatPrice ? formatPrice(stats.totalEarnings) : `$${stats.totalEarnings}`}</div>
+              </div>
+              <div className="stat-box">
+                <span className="label">Visits Completed</span>
+                <div className="value">{stats.totalJobs}</div>
+              </div>
+            </div>
+            
+            <h5 style={{ fontSize: '14px', marginBottom: '12px' }}>Recent Payouts</h5>
+            {stats.recentJobs && stats.recentJobs.length === 0 ? (
+              <p style={{ color: 'var(--text-muted)', fontSize: '13px' }}>No completed visits logged.</p>
+            ) : (
+              <div className="history-list">
+                {stats.recentJobs && stats.recentJobs.map(j => (
+                  <div className="history-card" key={j.id}>
+                    <div className="history-info">
+                      <h5>{j.patient_name}</h5>
+                      <span className="date">ID: #{j.id} • Completed</span>
+                    </div>
+                    <div className="history-payout">{formatPrice ? formatPrice(j.payout) : `$${j.payout}`}</div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 

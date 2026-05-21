@@ -265,52 +265,6 @@ export default function CustomerPortal({ user, socket, token, showToast, formatP
           onLocationUpdate={() => {}}
           onlineCaregivers={onlineCaregivers}
         />
-        
-        {/* Booking History list below map */}
-        <div className="glass-panel" style={{ padding: '25px' }}>
-          <h4 className="history-title">Your Care History</h4>
-          {isLoading ? (
-            <div className="history-list">
-              <div className="skeleton-card">
-                <div className="skeleton-header">
-                  <div className="skeleton-avatar" style={{ width: '38px', height: '38px' }}></div>
-                  <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                    <div className="skeleton-line title" style={{ width: '50%' }}></div>
-                    <div className="skeleton-line subtitle" style={{ width: '30%' }}></div>
-                  </div>
-                </div>
-              </div>
-              <div className="skeleton-card">
-                <div className="skeleton-header">
-                  <div className="skeleton-avatar" style={{ width: '38px', height: '38px' }}></div>
-                  <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                    <div className="skeleton-line title" style={{ width: '65%' }}></div>
-                    <div className="skeleton-line subtitle" style={{ width: '25%' }}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : history.length === 0 ? (
-            <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>No past bookings found.</p>
-          ) : (
-            <div className="history-list">
-              {history.map(b => (
-                <div className="history-card" key={b.id}>
-                  <div className="history-info">
-                    <h5>{b.service_type} - {b.caregiver_name || 'Caregiver'}</h5>
-                    <span className="date">ID: #{b.id} • Status: <strong className={`badge-status ${b.status}`}>{b.status}</strong></span>
-                    {b.patient_rating && (
-                      <div style={{ color: 'var(--color-accent)', fontSize: '12px', marginTop: '4px' }}>
-                        {'★'.repeat(b.patient_rating)}{'☆'.repeat(5 - b.patient_rating)}
-                      </div>
-                    )}
-                  </div>
-                  <div className="history-payout">{formatPrice ? formatPrice(b.payout) : `$${b.payout}`}</div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
 
       {/* Booking Form/Workflows right column */}
@@ -354,9 +308,55 @@ export default function CustomerPortal({ user, socket, token, showToast, formatP
               </div>
             </div>
 
-            <button className="btn-primary" onClick={handleRequestCare}>
+            <button className="btn-primary" onClick={handleRequestCare} style={{ marginBottom: '40px' }}>
               Request {currentServiceDetails.name}
             </button>
+
+            {/* Booking History list moved to bottom sheet */}
+            <div className="glass-panel" style={{ padding: '25px' }}>
+              <h4 className="history-title">Your Care History</h4>
+              {isLoading ? (
+                <div className="history-list">
+                  <div className="skeleton-card">
+                    <div className="skeleton-header">
+                      <div className="skeleton-avatar" style={{ width: '38px', height: '38px' }}></div>
+                      <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                        <div className="skeleton-line title" style={{ width: '50%' }}></div>
+                        <div className="skeleton-line subtitle" style={{ width: '30%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="skeleton-card">
+                    <div className="skeleton-header">
+                      <div className="skeleton-avatar" style={{ width: '38px', height: '38px' }}></div>
+                      <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                        <div className="skeleton-line title" style={{ width: '65%' }}></div>
+                        <div className="skeleton-line subtitle" style={{ width: '25%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : history.length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>No past bookings found.</p>
+              ) : (
+                <div className="history-list">
+                  {history.map(b => (
+                    <div className="history-card" key={b.id}>
+                      <div className="history-info">
+                        <h5>{b.service_type} - {b.caregiver_name || 'Caregiver'}</h5>
+                        <span className="date">ID: #{b.id} • Status: <strong className={`badge-status ${b.status}`}>{b.status}</strong></span>
+                        {b.patient_rating && (
+                          <div style={{ color: 'var(--color-accent)', fontSize: '12px', marginTop: '4px' }}>
+                            {'★'.repeat(b.patient_rating)}{'☆'.repeat(5 - b.patient_rating)}
+                          </div>
+                        )}
+                      </div>
+                      <div className="history-payout">{formatPrice ? formatPrice(b.payout) : `$${b.payout}`}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         ) : activeBooking.status === 'Requested' ? (
           <div className="glass-panel matching-overlay">
