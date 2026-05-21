@@ -150,40 +150,7 @@ function App() {
         ))}
       </div>
 
-      {/* Dev Mode Role Bar for convenient simulation testing */}
-      {token && user && (
-        <div className="role-switcher-bar">
-          <div className="role-title">
-            <span style={{ opacity: 0.7 }}>Logged in as:</span>
-            <strong>{user.name}</strong>
-            <span className="role-badge">{user.role}</span>
-          </div>
-          
-          <div className="switcher-buttons">
-            <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', marginRight: '6px' }}>
-              Simulator Mode:
-            </span>
-            <button 
-              className={`switch-btn ${activeRole === 'patient' ? 'active' : ''}`}
-              onClick={() => setActiveRole('patient')}
-            >
-              Patient View
-            </button>
-            <button 
-              className={`switch-btn ${activeRole === 'caregiver' ? 'active' : ''}`}
-              onClick={() => setActiveRole('caregiver')}
-            >
-              Caregiver View
-            </button>
-            <button 
-              className={`switch-btn ${activeRole === 'admin' ? 'active' : ''}`}
-              onClick={() => setActiveRole('admin')}
-            >
-              Admin Board
-            </button>
-          </div>
-        </div>
-      )}
+
 
       {/* Main navigation header */}
       <header className="main-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
