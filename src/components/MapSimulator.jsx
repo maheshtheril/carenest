@@ -43,9 +43,9 @@ export default function MapSimulator({
       fadeAnimation: true
     });
 
-    // Premium dark clinical Dark Matter tiles from CartoDB (matches health app dark mode aesthetics)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap contributors, © CARTO'
+    // Standard bright map tiles for maximum visibility
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     mapRef.current = map;
